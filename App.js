@@ -1,7 +1,10 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Card from "./Card";
+import RefreshIcon from "./assets/refresh.png";
+
+/* ICONS */
 import Realm from "./assets/realm.png";
 import Realm2 from "./assets/icon.png";
 
@@ -65,7 +68,7 @@ export default function App() {
       </View>
 
       <TouchableOpacity style={styles.restartButtonContainer} onPress={() => restart()}>
-        <Text style={styles.restartButtonText}>Reiniciar</Text>
+        <Image source={RefreshIcon} style={styles.restartButtonImage} resizeMode="contain" />
       </TouchableOpacity>
 
       <StatusBar style="light" />
@@ -97,18 +100,15 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   restartButtonContainer: {
-    marginBottom: 10,
-    width: '50%',
+    position: "absolute",
+    top: 30,
+    right: 30,
+    width: 30,
     height: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ff7c17",
-    borderRadius: 10
   },
-  restartButtonText: {
-    fontSize: 15,
-    fontWeight: "600",
-    color: '#FFF'
+  restartButtonImage: {
+    width: '100%',
+    height: '100%'
   }
 });
 
