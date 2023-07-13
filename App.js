@@ -10,7 +10,7 @@ import Realm2 from "./assets/icon.png";
 
 const cards = [
   Realm,
-  Realm2
+  Realm2,
 ];
 
 export default function App() {
@@ -48,9 +48,11 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>
-        {matchedCards.length === board.length ? "Parabéns! 🎉" : "Memória Realm "}
-      </Text>
+      <Image style={styles.logo} source={require('./assets/realm.png')} resizeMode="contain" />
+
+      {matchedCards.length === board.length && <Text style={styles.title}>
+        Parabéns! 🎉
+      </Text>}
 
       <Text style={styles.subtitle}>Movimentos: {score}</Text>
 
@@ -82,6 +84,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#0f172a",
     alignItems: "center",
   },
+  logo: {
+    width: 100,
+    height: 100,
+    marginTop: 15
+  },
   board: {
     flexDirection: "row",
     justifyContent: "center",
@@ -91,7 +98,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "900",
     color: "snow",
-    marginVertical: 15,
+    marginTop: 5,
+    marginBottom: 15,
   },
   subtitle: {
     fontSize: 24,
