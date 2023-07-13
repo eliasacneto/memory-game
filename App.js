@@ -1,26 +1,13 @@
-import * as React from "react";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Card from "./Card";
-import {Realm} from "./assets/realm.png"
+import Realm from "./assets/snack-icon.png"
+import Realm2 from "./assets/snack-icon.png"
 
 const cards = [
-  // "🥹",
-  // "🗣️",
-  // "🦷",
-  // "🍑",
-  // "🌪️",
-  // "🌎",
-  {Realm},
-  "🐷",
-  "🪝",
-  "⚛️",
-  "🔑",
-  "🥕",
-  "🥑",
-  // "👻",
-  // "🥶",
-  // "🥵",
+  Realm,
+  Realm2
 ];
 
 export default function App() {
@@ -39,7 +26,7 @@ export default function App() {
       const timeoutId = setTimeout(() => setSelectedCards([]), 1000);
       return () => clearTimeout(timeoutId);
     }
-  }, [selectedCards]);
+  }, [selectedCards, board, matchedCards]);
 
   const handleTapCard = (index) => {
     if (selectedCards.length >= 2 || selectedCards.includes(index)) return;
@@ -47,14 +34,14 @@ export default function App() {
     setScore(score + 1);
   };
 
-  const didPlayerWin = () => matchedCards.length === board.length;
-
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
-        {didPlayerWin() ? "Parabéns! 🎉" : "Memória Realm "}
+        {matchedCards.length === board.length ? "Parabéns! 🎉" : "Memória Realm "}
       </Text>
+
       <Text style={styles.subtitle}>Movimentos: {score}</Text>
+      
       <View style={styles.board}>
         {board.map((card, index) => {
           const isTurnedOver =
@@ -64,12 +51,12 @@ export default function App() {
               key={index}
               isTurnedOver={isTurnedOver}
               onPress={() => handleTapCard(index)}
-            >
-              {card}
-            </Card>
+              card={card}
+            />
           );
         })}
       </View>
+
       <StatusBar style="light" />
     </SafeAreaView>
   );
