@@ -97,10 +97,19 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   restartButtonContainer: {
-    position: "absolute",
-    width: 20,
-    height: 20
+    marginBottom: 10,
+    width: '50%',
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#ff7c17",
+    borderRadius: 10
   },
+  restartButtonText: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: '#FFF'
+  }
 });
 
 /**
