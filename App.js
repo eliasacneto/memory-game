@@ -1,9 +1,9 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Card from "./Card";
-import Realm from "./assets/snack-icon.png"
-import Realm2 from "./assets/snack-icon.png"
+import Realm from "./assets/realm.png";
+import Realm2 from "./assets/icon.png";
 
 const cards = [
   Realm,
@@ -11,10 +11,23 @@ const cards = [
 ];
 
 export default function App() {
-  const [board, setBoard] = React.useState(() => shuffle([...cards, ...cards]));
+  const [board, setBoard] = React.useState([]);
   const [selectedCards, setSelectedCards] = React.useState([]);
   const [matchedCards, setMatchedCards] = React.useState([]);
   const [score, setScore] = React.useState(0);
+
+  const restart = () => {
+    setBoard(shuffle([...cards, ...cards]));
+    setSelectedCards([]);
+    setMatchedCards([]);
+    setScore(0);
+  };
+
+  const handleTapCard = React.useCallback((index) => {
+    if (selectedCards.length >= 2 || selectedCards.includes(index)) return;
+    setSelectedCards([...selectedCards, index]);
+    setScore(score => score + 1);
+  }, [selectedCards]);
 
   React.useEffect(() => {
     if (selectedCards.length < 2) return;
@@ -28,11 +41,7 @@ export default function App() {
     }
   }, [selectedCards, board, matchedCards]);
 
-  const handleTapCard = (index) => {
-    if (selectedCards.length >= 2 || selectedCards.includes(index)) return;
-    setSelectedCards([...selectedCards, index]);
-    setScore(score + 1);
-  };
+  React.useEffect(() => { restart(); }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -41,21 +50,23 @@ export default function App() {
       </Text>
 
       <Text style={styles.subtitle}>Movimentos: {score}</Text>
-      
+
       <View style={styles.board}>
-        {board.map((card, index) => {
-          const isTurnedOver =
-            selectedCards.includes(index) || matchedCards.includes(index);
-          return (
-            <Card
-              key={index}
-              isTurnedOver={isTurnedOver}
-              onPress={() => handleTapCard(index)}
-              card={card}
-            />
-          );
-        })}
+        {board.map((card, index) => (
+          <Card
+            key={index}
+            isTurnedOver={selectedCards.includes(index)}
+            isMatched={matchedCards.includes(index)}
+            onPress={() => handleTapCard(index)}
+            card={card}
+            disabled={selectedCards.length >= 2 || selectedCards.includes(index)}
+          />
+        ))}
       </View>
+
+      <TouchableOpacity style={styles.restartButtonContainer} onPress={() => restart()}>
+        <Text style={styles.restartButtonText}>Reiniciar</Text>
+      </TouchableOpacity>
 
       <StatusBar style="light" />
     </SafeAreaView>
@@ -67,7 +78,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#0f172a",
     alignItems: "center",
-    justifyContent: "start",
   },
   board: {
     flexDirection: "row",
@@ -85,6 +95,11 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     color: "snow",
     marginVertical: 15,
+  },
+  restartButtonContainer: {
+    position: "absolute",
+    width: 20,
+    height: 20
   },
 });
 
