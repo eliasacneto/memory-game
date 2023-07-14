@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "memoTest",
-    "slug": "memoTest",
+    "name": "Realm Memo",
+    "slug": "realmMemo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash-realm.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.dev.realm.realmMemo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9db463c5-e418-4431-a3b7-baadb8da4632"
+      }
     }
   }
 }
