@@ -5,12 +5,23 @@ import Card from "./Card";
 import RefreshIcon from "./assets/refresh.png";
 
 /* ICONS */
-import Realm from "./assets/realm.png";
-import Realm2 from "./assets/icon.png";
+import Wizard from "./assets/logos/logo-wizard.png";
+import Cajuina from "./assets/logos/logo-cajuina.png";
+import HC from "./assets/logos/logo-hc.png";
+import SG from "./assets/logos/logo-sg.png";
+import Jua from "./assets/logos/logo-jua.png";
+import MP from "./assets/logos/logo-mp.png";
+import TI from "./assets/logos/logo-ti.png";
+import Moveis from "./assets/logos/logo-moveis.png";
+import Massoterapia from "./assets/logos/logo-massoterapia.png";
 
 const cards = [
-  Realm,
-  Realm2,
+  Cajuina,
+  Jua,
+  TI,
+  MP,
+  Moveis,
+  Massoterapia,
 ];
 
 export default function App() {
@@ -48,7 +59,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image style={styles.logo} source={require('./assets/realm.png')} resizeMode="contain" />
+      <Image style={styles.logo} source={require('./assets/logo-realm.png')} resizeMode="contain" />
 
       {matchedCards.length === board.length && <Text style={styles.title}>
         Parabéns! 🎉
@@ -85,9 +96,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 100,
+    width: 150,
     height: 100,
-    marginTop: 15
+    marginTop: 10
   },
   board: {
     flexDirection: "row",
@@ -109,7 +120,7 @@ const styles = StyleSheet.create({
   },
   restartButtonContainer: {
     position: "absolute",
-    top: 30,
+    top: 90,
     right: 30,
     width: 30,
     height: 30,
